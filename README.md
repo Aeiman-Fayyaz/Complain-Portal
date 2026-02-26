@@ -1,16 +1,43 @@
-# React + Vite
+# 🚨 SMIT Complaint Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A ReactJS web application that enables users to file, track, and manage complaints through a secure, responsive interface. Users can submit issues, view status updates, and administrators can review and respond to complaints.
 
-Currently, two official plugins are available:
+<img width="1600" height="735" alt="image" src="https://github.com/user-attachments/assets/d4fe9bea-009a-441f-b89a-77a5de1f03fc" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+### 📌 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 https://smit-complaint-portal.vercel.app/
 
-## Expanding the ESLint configuration
+### 🧠 Overview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The SMIT Complaint Portal provides a centralized platform for users to:
+
+- Register and authenticate
+- Submit new complaints with detailed information
+- Track the status of existing complaints
+- Receive updates on progress
+
+This system enhances transparency, accountability, and efficiency in handling user grievances.
+
+### 🛠️ Features
+
+- ✔ User Authentication – Register, login, and manage profiles securely.
+- ✔ Complaint Submission – Users can file complaints with relevant details.
+- ✔ Status Tracking – See current progress on submitted complaints.
+- ✔ Admin Panel – Admins can view all complaints and manage resolution (if implemented).
+- ✔ Responsive UI – Works across devices (mobile, tablet, desktop).
+
+### 🧩 Tech Stack
+
+- Frontend - ReactJS , Tailwind
+- Bakend - Firebase
+
+### 🙌 Acknowledgements
+
+Share your thoughts about project ❤
+
+### Contact Info
+
+- 📩 Email: aeimanfayyaz2002@gmail.com
+- 📞 Contact no: +92 336 1136547 
