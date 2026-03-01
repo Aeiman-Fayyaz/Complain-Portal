@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Mycomplain from "./pages/Mycomplain";
 import SignUp from "./pages/SignUp";
+import Trainer from "./pages/Trainer";
 import "./App.css";
 
 export const ThemeContext = createContext();
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/complain" element={<Complain />} /> {/* All Complains */}
           <Route path="/mycomplain" element={<Mycomplain />} />
+          <Route path="/trainer" element={<Trainer />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>

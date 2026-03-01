@@ -58,6 +58,13 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           }`}>
             New Complaint
           </Link>
+          <Link to="/trainer" onClick={() => { if(window.innerWidth < 768) toggleSidebar() }} className={`block p-3 rounded-xl transition ${
+            darkMode
+              ? "hover:bg-slate-700 hover:text-[#8EC748]"
+              : "hover:bg-white/30 hover:text-[#8EC748]"
+          }`}>
+            Trainer Complaint
+          </Link>
           <Link to="/admin" onClick={() => { if(window.innerWidth < 768) toggleSidebar() }} className={`block p-3 rounded-xl transition ${
             darkMode
               ? "hover:bg-slate-700 hover:text-[#8EC748]"

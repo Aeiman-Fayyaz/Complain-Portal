@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import { db, auth } from "../firebase";
-import { ref, onValue, get } from "firebase/database";
+import { ref, onValue, get, update } from "firebase/database";
+import Swal from "sweetalert2";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../App";
@@ -92,7 +93,38 @@ export default function MyComplain() {
                 darkMode ? "text-[#8EC748]" : "text-[#8EC748]"
               }`}>{c.category}</p>
               <p className="mt-2">{c.description}</p>
+              <p className="mt-2">Batch: {c.batch || '—'} • Course: {c.course || '—'} • Campus: {c.campus || '—'}</p>
               <p className="mt-3">Status: {c.status}</p>
+
+              <div className="mt-4 flex gap-3">
+                <button onClick={async () => {
+                  const { value: newDesc } = await Swal.fire({
+                    title: 'Edit Description',
+                    input: 'textarea',
+                    inputLabel: 'Description',
+                    inputValue: c.description || '',
+                    showCancelButton: true,
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Cancel',
+                    inputAttributes: {
+                      'aria-label': 'Type the updated description here'
+                    },
+                    preConfirm: (value) => {
+                      if (!value || !value.trim()) {
+                        Swal.showValidationMessage('Description cannot be empty');
+                      }
+                      return value;
+                    }
+                  });
+
+                  if (newDesc !== undefined && newDesc !== null) {
+                    await update(ref(db, 'complaints/' + c.id), {
+                      description: newDesc
+                    });
+                    Swal.fire('Updated ✅', 'Complaint description updated', 'success');
+                  }
+                }} className="px-4 py-2 bg-blue-600 text-white rounded-xl">Edit</button>
+              </div>
 
             </div>
 

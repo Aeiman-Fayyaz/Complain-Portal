@@ -55,7 +55,7 @@ export default function Navbar({ toggleSidebar }) {
               : "bg-gray-200 text-gray-800 hover:bg-gray-300"
           }`}
         >
-          {darkMode ? "☀️ Light" : "🌙 Dark"}
+          {darkMode ? "☀️" : "🌙"}
         </button>
 
         {/* Logout Button */}

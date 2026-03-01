@@ -91,9 +91,11 @@ export default function Admin() {
           darkMode ? "text-[#8EC748]" : "text-[#0D76BA]"
         }`}>Admin Panel</h2>
       </div>
+      <div className="mb-8">
+        <h3 className={`text-2xl font-semibold mb-4 ${darkMode ? 'text-[#8EC748]' : 'text-[#0D76BA]'}`}>Student Complaints</h3>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {list.map((c) => (
+        <div className="grid md:grid-cols-2 gap-6">
+          {list.filter(c => (c.userRole || 'student') === 'student').map((c) => (
           <div
             key={c.id}
             className={`rounded-3xl shadow-lg border p-6 hover:shadow-2xl transition-all hover:scale-105 transform animate-slideUp ${
@@ -166,7 +168,88 @@ export default function Admin() {
               <option value="resolved">resolved</option>
             </select>
           </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className={`text-2xl font-semibold mb-4 ${darkMode ? 'text-[#8EC748]' : 'text-[#0D76BA]'}`}>Trainer Complaints</h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          {list.filter(c => (c.userRole || 'student') === 'trainer').map((c) => (
+            <div
+              key={c.id}
+              className={`rounded-3xl shadow-lg border p-6 hover:shadow-2xl transition-all hover:scale-105 transform animate-slideUp ${
+                darkMode
+                  ? "bg-slate-800 border-slate-700"
+                  : "bg-white border-gray-100"
+              }`}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <User className={`w-5 h-5 ${
+                    darkMode ? "text-[#8EC748]" : "text-[#0D76BA]"
+                  }`} />
+                  <p className={`text-lg font-bold ${
+                    darkMode ? "text-[#8EC748]" : "text-[#0D76BA]"
+                  }`}>{c.userName}</p>
+                </div>
+                <button
+                  onClick={() => deleteComplaint(c.id)}
+                  className="p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-800 transition"
+                  title="Delete complaint"
+                >
+                  <Trash2 className={`w-5 h-5 ${
+                    darkMode ? "text-red-400" : "text-red-600"
+                  }`} />
+                </button>
+              </div>
+
+              <div className={`space-y-3 mb-4 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                {c.createdAt && (
+                  <p className="text-sm opacity-70">
+                    {new Date(c.timestamp).toLocaleString()}
+                  </p>
+                )}
+                <div className="flex items-center gap-2">
+                  <Folder className={`w-5 h-5 ${
+                    darkMode ? "text-slate-400" : "text-gray-500"
+                  }`} />
+                  <p><span className="font-semibold">Category:</span> {c.category}</p>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <FileText className={`w-5 h-5 mt-1 ${
+                    darkMode ? "text-slate-400" : "text-gray-500"
+                  }`} />
+                  <p><span className="font-semibold">Issue:</span> {c.description}</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Zap className={`w-5 h-5 ${
+                    darkMode ? "text-[#8EC748]" : "text-[#0D76BA]"
+                  }`} />
+                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${statusColors[c.status] || (darkMode ? "bg-gray-700" : "bg-gray-100")}`}>
+                    {c.status.charAt(0).toUpperCase() + c.status.slice(1).replace("-", " ")}
+                  </span>
+                </div>
+              </div>
+
+              <select
+                value={c.status}
+                onChange={(e) => updateStatus(c.id, e.target.value)}
+                className={`w-full p-2 rounded-lg border transition-all outline-none focus:ring-2 focus:ring-[#0D76BA]/30 ${
+                  darkMode
+                    ? "bg-slate-700 border-slate-600 text-white focus:border-[#8EC748]"
+                    : "bg-white border-gray-300 text-gray-700 focus:border-[#0D76BA]"
+                }`}
+              >
+                <option value="pending">pending</option>
+                <option value="in-progress">in-progress</option>
+                <option value="resolved">resolved</option>
+              </select>
+            </div>
+          ))}
+        </div>
       </div>
 
       {list.length === 0 && (

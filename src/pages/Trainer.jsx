@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { AlertCircle, MessageSquare } from "lucide-react";
 import { ThemeContext } from "../App";
 
-export default function Complain() {
+export default function Trainer() {
 
   const navigate = useNavigate();
   const { darkMode } = useContext(ThemeContext);
@@ -28,8 +28,8 @@ export default function Complain() {
       if (snapshot.exists()) {
         const userData = snapshot.val();
 
-        if (userData.role !== "student") {
-          navigate("/admin");
+        if (userData.role !== "trainer") {
+          navigate("/dashboard");
         }
       }
     };
@@ -41,15 +41,10 @@ export default function Complain() {
   const submit = (e) => {
     e.preventDefault();
 
-
     const category = e.target.category.value;
     const description = e.target.desc.value;
-    const batch = e.target.batch?.value || "";
-    const course = e.target.course?.value || "";
-    const campus = e.target.campus?.value || "";
     const currentDate = new Date();
 
-    // get user profile for name and role
     const uid = auth.currentUser.uid;
     get(ref(db, "users/" + uid)).then((snap) => {
       const userData = snap.exists() ? snap.val() : {};
@@ -57,10 +52,7 @@ export default function Complain() {
       push(ref(db, "complaints"), {
         userId: uid,
         userName: userData.name || auth.currentUser.email,
-        userRole: userData.role || "student",
-        batch,
-        course,
-        campus,
+        userRole: userData.role || "trainer",
         category,
         description,
         status: "pending",
@@ -69,6 +61,7 @@ export default function Complain() {
       });
 
       Swal.fire("Submitted 🎉", "Complaint Added Successfully", "success");
+
       e.target.reset();
     });
   };
@@ -89,7 +82,7 @@ export default function Complain() {
               <h2 className={`text-3xl font-bold ${
                 darkMode ? "text-[#8EC748]" : "text-[#0D76BA]"
               }`}>
-                New Complaint
+                Trainer Complaint
               </h2>
             </div>
 
@@ -105,23 +98,11 @@ export default function Complain() {
                   required
                 >
                   <option value="">Select Issue Category</option>
-                  <option value="Water Supply">💧 Water Supply</option>
-                  <option value="Electricity">⚡ Electricity</option>
-                  <option value="Internet">📡 Internet/WiFi</option>
-                  <option value="Maintenance">🔧 Maintenance</option>
-                  <option value="Cleaning">🧹 Cleaning</option>
-                  <option value="Security">🔒 Security</option>
-                  <option value="Noise Pollution">🔊 Noise Pollution</option>
-                  <option value="Parking">🅿️ Parking</option>
-                  <option value="Other">📝 Other</option>
+                  <option value="Policy">Policy</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
-
-                <div className="grid md:grid-cols-3 gap-3">
-                  <input name="batch" placeholder="Batch" className="px-4 py-3 rounded-xl border" />
-                  <input name="course" placeholder="Course" className="px-4 py-3 rounded-xl border" />
-                  <input name="campus" placeholder="Campus" className="px-4 py-3 rounded-xl border" />
-                </div>
 
               <div className="relative">
                 <MessageSquare className={`absolute left-3 top-3 w-5 h-5 ${

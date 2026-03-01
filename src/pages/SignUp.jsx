@@ -27,6 +27,9 @@ export default function Signup() {
         name: user.displayName || email.split("@")[0],
         email: email,
         role: role,
+        batch: "",
+        course: "",
+        campus: "",
       });
 
       Swal.fire("Success 🎉", "Account Created", "success");
@@ -44,6 +47,9 @@ export default function Signup() {
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
     const role = e.target.role.value;
+    const batch = e.target.batch?.value || "";
+    const course = e.target.course?.value || "";
+    const campus = e.target.campus?.value || "";
 
     if (password !== confirmPassword) {
       Swal.fire("Error ❌", "Password and Confirm Password do not match", "error");
@@ -63,6 +69,9 @@ export default function Signup() {
         name: name,
         email: email,
         role: role,
+        batch: batch,
+        course: course,
+        campus: campus,
       });
 
       Swal.fire("Success 🎉", "Account Created", "success");
@@ -197,8 +206,16 @@ export default function Signup() {
             >
               <option value="">Select Role</option>
               <option value="student">Student</option>
+              <option value="trainer">Trainer</option>
               <option value="admin">Admin</option>
             </select>
+
+            {/* Student specific fields */}
+            <div className="space-y-3">
+              <input name="batch" placeholder="Batch (e.g. 2023)" className="w-full px-4 py-3 rounded-xl border" />
+              <input name="course" placeholder="Course (e.g. BCS)" className="w-full px-4 py-3 rounded-xl border" />
+              <input name="campus" placeholder="Campus (e.g. Main Campus)" className="w-full px-4 py-3 rounded-xl border" />
+            </div>
 
             <button
               type="submit"

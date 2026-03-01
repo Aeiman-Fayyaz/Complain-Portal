@@ -79,6 +79,7 @@ export default function Login() {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const selectedRole = e.target.role?.value || "";
 
     try {
       if (email !== ADMIN_EMAIL) {
@@ -96,13 +97,23 @@ export default function Login() {
             return;
           }
 
+          if (selectedRole && selectedRole !== userData.role) {
+            Swal.fire("Error ❌", "Selected role does not match registered role", "error");
+            await auth.signOut();
+            return;
+          }
+
           Swal.fire("Success 🎉", "Login Successful", "success");
-          navigate("/dashboard");
+          if (userData.role === "trainer") navigate("/trainer");
+          else navigate("/dashboard");
         } else {
           await set(ref(db, "users/" + uid), {
             name: email.split("@")[0],
             email: email,
             role: "student",
+            batch: "",
+            course: "",
+            campus: "",
           });
 
           Swal.fire("Success 🎉", "Login Successful", "success");
@@ -182,6 +193,20 @@ export default function Login() {
                 required
               />
             </div>
+
+            <select
+              name="role"
+              className={`w-full px-4 py-3 rounded-xl border transition-all outline-none focus:ring-2 focus:ring-[#0D76BA]/30 ${
+                darkMode
+                  ? "bg-slate-700 border-slate-600 text-white focus:border-[#8EC748]"
+                  : "bg-white border-gray-300 text-gray-700 focus:border-[#0D76BA]"
+              }`}
+            >
+              <option value="">Select Role (optional)</option>
+              <option value="student">Student</option>
+              <option value="trainer">Trainer</option>
+              <option value="admin">Admin</option>
+            </select>
 
             <div className="relative group">
               <Lock className={`absolute left-3 top-3.5 w-5 h-5 ${
