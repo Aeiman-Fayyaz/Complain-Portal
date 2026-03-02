@@ -22,7 +22,7 @@ export default function Navbar({ toggleSidebar }) {
   };
 
   return (
-    <div className={`h-14 shadow flex justify-between px-4 md:px-6 items-center sticky top-0 z-30 transition-colors duration-300 ${
+    <div className={`h-14 shadow flex justify-between px-4 md:px-6 items-center sticky top-0 z-60 transition-colors duration-300 ${
       darkMode 
         ? "bg-slate-800 text-white" 
         : "bg-white text-slate-900"

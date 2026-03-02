@@ -22,7 +22,7 @@ export default function Layout({ children }) {
         <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
 
         {/* Main Content Area: Mobile par p-4, Desktop par p-8 */}
-        <main className={`flex-1 p-4 md:p-8 overflow-y-auto w-full transition-all duration-300 ${
+        <main className={`flex-1 p-4 md:p-8 overflow-y-auto w-full md:ml-64 transition-all duration-300 ${
           darkMode ? "bg-slate-900 text-white" : "bg-white text-slate-900"
         }`}>
           {children}

@@ -10,14 +10,14 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       {/* Overlay: Jab mobile par sidebar khulay toh peeche wali screen dark ho jaye */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/40 z-40 md:hidden" 
+          className="fixed inset-0 top-14 bg-black/40 z-40 md:hidden" 
           onClick={toggleSidebar}
         ></div>
       )}
 
       {/* Sidebar Main Div */}
       <div className={`
-        fixed md:static inset-y-0 left-0 z-50 w-64 min-h-screen shadow-xl transform transition-all duration-300 ease-in-out
+        fixed inset-y-0 left-0 top-14 z-50 w-64 overflow-y-auto shadow-xl transform transition-all duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
         ${darkMode 
           ? "bg-slate-800/80 backdrop-blur-xl border-r border-slate-700 text-[#8EC748]" 
